@@ -9,11 +9,11 @@ interface ApiService {
 
     @GET(Constants.characters)
     suspend fun fetchCharacters(
-        @Query("apiKey") key: String,
+        @Query("apiKey") key: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String,
         @Query("ts") timestamp: String,
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
-    ):CharactersResponse
+    ): CharactersResponse
 
 }

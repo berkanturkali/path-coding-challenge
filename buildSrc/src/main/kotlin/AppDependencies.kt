@@ -146,10 +146,19 @@ object Dependencies {
             const val junit_version = "4.13.2"
             const val junit_ext_version = "1.1.3"
             const val espresso_version = "3.4.0"
+            const val mockWebServer_version = "4.9.3"
+            const val mockK_version = "1.12.2"
+            const val truth="1.1.3"
+            const val coroutines: String = "1.5.2"
         }
 
         const val junit = "junit:junit:${Version.junit_version}"
         const val junitExt = "androidx.test.ext:junit:${Version.junit_ext_version}"
         const val espresso = "androidx.test.espresso:espresso-core:${Version.espresso_version}"
+        const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer_version}"
+        const val mockk = "io.mockk:mockk:${Version.mockK_version}"
+        const val truth = "com.google.truth:truth:${Version.truth}"
+        const val coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
     }
 }
