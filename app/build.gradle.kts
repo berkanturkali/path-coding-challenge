@@ -1,3 +1,4 @@
+import ProjectLib.core
 import ProjectLib.remote
 
 plugins {
@@ -7,4 +8,5 @@ dependencies {
 
     //project libs
     implementation(project(remote))
+    implementation(project(core))
 }
