@@ -16,10 +16,9 @@ import javax.inject.Inject
 public class RemoteFactory @Inject constructor(
     private val moshi: Moshi,
 ) {
-    public fun createRetrofit(url: String, isDebug: Boolean, key: String): Retrofit {
+    public fun createRetrofit(url: String, isDebug: Boolean): Retrofit {
         val client: OkHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor((isDebug)),
-            key = key
+            makeLoggingInterceptor((isDebug))
         )
         return Retrofit.Builder()
             .baseUrl(url)
@@ -39,8 +38,7 @@ public class RemoteFactory @Inject constructor(
     }
 
     private fun makeOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor,
-        key: String
+        httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(NoInternetInterceptor)
@@ -50,7 +48,7 @@ public class RemoteFactory @Inject constructor(
                 val chainRequest = chain.request()
                 val originalUrl = chainRequest.url
                 val httpUrl = originalUrl.newBuilder()
-                    .addQueryParameter("apiKey", key)
+                    .addQueryParameter("apiKey", PUBLIC_API_KEY)
                     .addQueryParameter("ts", System.currentTimeMillis().toString())
                     .addQueryParameter(
                         "hash", HASH_FORMAT.format(

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class CharacterRepositoryImpl @Inject constructor(
+class CharactersRepositoryImpl @Inject constructor(
     private val characterMapper: CharacterMapper,
     private val charactersRemote: CharactersRemote
 ) : CharactersRepository {
