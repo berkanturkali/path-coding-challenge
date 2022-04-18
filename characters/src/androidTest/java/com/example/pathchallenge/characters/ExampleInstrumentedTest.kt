@@ -1,4 +1,4 @@
-package com.example.pathchallenge.mylibrary
+package com.example.pathchallenge.characters
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.example.pathchallenge.mylibrary
+package com.example.pathchallenge.characters
 
 import org.junit.Test
 
