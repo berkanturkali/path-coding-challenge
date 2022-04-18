@@ -1,3 +1,5 @@
+import ProjectLib.remote
+
 plugins {
     androidLib
     daggerHilt
@@ -5,6 +7,9 @@ plugins {
 android.defaultConfig.buildConfigField("String", "BASE_URL", "\"https://gateway.marvel.com/\"")
 
 dependencies {
+
+    //project lib
+    implementation(project(remote))
 
     //network
     implementation(Dependencies.Network.retrofit)
