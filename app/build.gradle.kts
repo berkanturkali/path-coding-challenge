@@ -1,4 +1,5 @@
 import ProjectLib.characters
+import ProjectLib.common
 import ProjectLib.core
 import ProjectLib.remote
 
@@ -11,4 +12,5 @@ dependencies {
     implementation(project(remote))
     implementation(project(core))
     implementation(project(characters))
+    implementation(project(common))
 }
