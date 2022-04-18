@@ -1,3 +1,4 @@
+import ProjectLib.common
 import ProjectLib.core
 
 plugins {
@@ -9,6 +10,7 @@ dependencies {
 
     //project libs
     implementation(project(core))
+    implementation(project(common))
 
     //dagger hilt
     implementation(Dependencies.DI.daggerHiltAndroid)
@@ -16,4 +18,7 @@ dependencies {
 
     //paging 3
     implementation(Dependencies.Paging.paging)
+
+    //fragment-ktx
+    implementation(Dependencies.AndroidX.fragmentKtx)
 }

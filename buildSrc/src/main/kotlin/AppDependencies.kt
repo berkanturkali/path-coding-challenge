@@ -15,6 +15,7 @@ object Dependencies {
             const val appCompat_version = "1.4.1"
             const val material_version = "1.5.0"
             const val constraint_layout_version = "2.1.3"
+            const val fragment_ktx_version = "1.4.1"
         }
 
         const val coreKtx = "androidx.core:core-ktx:${Version.coreKtx_version}"
@@ -22,6 +23,7 @@ object Dependencies {
         const val material = "com.google.android.material:material:${Version.material_version}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Version.constraint_layout_version}"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:${Version.fragment_ktx_version}"
 
         override val components: List<String>
             get() = listOf(
@@ -87,7 +89,6 @@ object Dependencies {
     object DI {
         object Version {
             const val daggerHilt: String = "2.38.1"
-            const val hiltFragment: String = "1.0.0"
         }
 
         object AnnotationProcessor {
@@ -98,8 +99,6 @@ object Dependencies {
         const val daggerHiltAndroid: String =
             "com.google.dagger:hilt-android:${Version.daggerHilt}"
         const val hiltCore: String = "com.google.dagger:hilt-core:${Version.daggerHilt}"
-        const val hiltFragment: String =
-            "androidx.hilt:hilt-navigation-fragment:${Version.hiltFragment}"
     }
 
     object Coroutines : Libraries {
