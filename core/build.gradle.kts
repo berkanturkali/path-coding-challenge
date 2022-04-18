@@ -14,6 +14,9 @@ dependencies {
     implementation(Dependencies.DI.daggerHiltAndroid)
     kapt(Dependencies.DI.AnnotationProcessor.daggerHilt)
 
+    //paging 3
+    implementation(Dependencies.Paging.paging)
+
 
     /* test */
     testImplementation(Dependencies.Test.mockWebServer)
@@ -21,4 +24,5 @@ dependencies {
     testImplementation(Dependencies.Network.retrofitMoshi)
     testImplementation(Dependencies.Network.moshi)
     testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.mockk)
 }

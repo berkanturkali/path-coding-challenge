@@ -27,7 +27,7 @@ class CharactersRemoteImplTest {
     @Test
     fun `check that fetch character returns data successfully`() {
         runBlocking {
-            val characters = charactersRemote.fetchCharacters(HASH, TS, OFFSET, LIMIT)
+            val characters = charactersRemote.fetchCharacters(OFFSET, LIMIT)
             val response = getCharactersResponse(CHARACTERS_RESPONSE_PATH)
             Truth.assertThat(characters.data.results).isNotEmpty()
             Truth.assertThat(characters.data.results.size).isEqualTo(response.data.results.size)
@@ -38,7 +38,7 @@ class CharactersRemoteImplTest {
     @Test
     fun `check that fetch characters makes a GET request`() {
         runBlocking {
-            charactersRemote.fetchCharacters(HASH, TS, OFFSET, LIMIT)
+            charactersRemote.fetchCharacters(OFFSET, LIMIT)
             Truth.assertThat("GET $CHARACTERS_FULL_PATH HTTP/1.1")
                 .isEqualTo(mockWebServer.takeRequest().requestLine)
         }

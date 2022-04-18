@@ -12,7 +12,7 @@ package com.example.pathchallenge.core.remote.model.characters
 data class CharacterDto(
     val comics: ComicsDto,
     val description: String,
-    val id: String,
+    val id: Int,
     val modified: String,
     val name: String,
     val thumbnail: ThumbnailDto,

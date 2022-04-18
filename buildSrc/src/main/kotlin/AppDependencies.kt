@@ -1,4 +1,5 @@
 import Dependencies.DB.Version.room_version
+import Dependencies.Paging.Version.paging_version
 import Dependencies.View.Version.glideVersion
 
 interface Libraries {
@@ -68,11 +69,8 @@ object Dependencies {
             const val okhttp: String = "4.9.0"
             const val retrofit: String = "2.9.0"
             const val moshi: String = "1.13.0"
-            const val paging = "3.0.1"
         }
 
-        const val paging = "androidx.paging:paging-runtime:${Version.paging}"
-        const val pagingCommon = "androidx.paging:paging-common-ktx:${Version.paging}"
         const val okhttp: String = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
         const val loggingInterceptor: String =
             "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
@@ -141,6 +139,15 @@ object Dependencies {
         const val timber = "com.jakewharton.timber:timber:${Version.timber}"
     }
 
+    object Paging {
+        object Version {
+            const val paging_version = "3.1.1"
+        }
+
+        const val paging = "androidx.paging:paging-runtime:$paging_version"
+        const val pagingCommon = "androidx.paging:paging-common:$paging_version"
+    }
+
     object Test {
         object Version {
             const val junit_version = "4.13.2"
@@ -148,14 +155,15 @@ object Dependencies {
             const val espresso_version = "3.4.0"
             const val mockWebServer_version = "4.9.3"
             const val mockK_version = "1.12.2"
-            const val truth="1.1.3"
+            const val truth = "1.1.3"
             const val coroutines: String = "1.5.2"
         }
 
         const val junit = "junit:junit:${Version.junit_version}"
         const val junitExt = "androidx.test.ext:junit:${Version.junit_ext_version}"
         const val espresso = "androidx.test.espresso:espresso-core:${Version.espresso_version}"
-        const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer_version}"
+        const val mockWebServer =
+            "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer_version}"
         const val mockk = "io.mockk:mockk:${Version.mockK_version}"
         const val truth = "com.google.truth:truth:${Version.truth}"
         const val coroutines =

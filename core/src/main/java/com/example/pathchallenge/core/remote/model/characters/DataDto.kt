@@ -1,9 +1,9 @@
 package com.example.pathchallenge.core.remote.model.characters
 
 data class DataDto(
-    val count: String,
-    val limit: String,
-    val offset: String,
+    val count: Int,
+    val limit: Int,
+    val offset: Int,
     val results: List<CharacterDto>,
-    val total: String
+    val total: Int
 )

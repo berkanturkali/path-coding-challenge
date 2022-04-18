@@ -1,8 +1,8 @@
 package com.example.pathchallenge.core.remote.model.characters
 
 data class ComicsDto(
-    val available: String,
+    val available: Int,
     val collectionURI: String,
     val items: List<ItemDto>,
-    val returned: String
+    val returned: Int
 )

@@ -9,14 +9,10 @@ class CharactersRemoteImpl @Inject constructor(
     private val apiService: ApiService
 ) : CharactersRemote {
     override suspend fun fetchCharacters(
-        hash: String,
-        ts: String,
         offset: Int,
         limit: Int
     ): CharactersResponse {
         return apiService.fetchCharacters(
-            hash = hash,
-            timestamp = ts,
             offset = offset,
             limit = limit
         )

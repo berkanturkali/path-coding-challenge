@@ -13,6 +13,11 @@ class RequestDispatcher : Dispatcher() {
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson(CHARACTERS_RESPONSE_PATH))
             }
+            EMPTY_CHARACTERS_PATH -> {
+                MockResponse()
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(getJson(EMPTY_CHARACTERS_RESPONSE_PATH))
+            }
             else -> throw IllegalArgumentException("Unknown Request Path ${request.path}")
         }
     }

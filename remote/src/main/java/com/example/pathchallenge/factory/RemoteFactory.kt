@@ -1,5 +1,9 @@
 package com.example.pathchallenge.factory
 
+import com.example.pathchallenge.Constants.HASH_FORMAT
+import com.example.pathchallenge.Constants.PRIVATE_API_KEY
+import com.example.pathchallenge.Constants.PUBLIC_API_KEY
+import com.example.pathchallenge.extensions.toMD5
 import com.example.pathchallenge.interceptor.NoInternetInterceptor
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -12,9 +16,10 @@ import javax.inject.Inject
 public class RemoteFactory @Inject constructor(
     private val moshi: Moshi,
 ) {
-    public fun createRetrofit(url: String, isDebug: Boolean): Retrofit {
+    public fun createRetrofit(url: String, isDebug: Boolean, key: String): Retrofit {
         val client: OkHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor((isDebug))
+            makeLoggingInterceptor((isDebug)),
+            key = key
         )
         return Retrofit.Builder()
             .baseUrl(url)
@@ -35,10 +40,27 @@ public class RemoteFactory @Inject constructor(
 
     private fun makeOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        key: String
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(NoInternetInterceptor)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor { chain ->
+                val timestamp = System.currentTimeMillis().toString()
+                val chainRequest = chain.request()
+                val originalUrl = chainRequest.url
+                val httpUrl = originalUrl.newBuilder()
+                    .addQueryParameter("apiKey", key)
+                    .addQueryParameter("ts", System.currentTimeMillis().toString())
+                    .addQueryParameter(
+                        "hash", HASH_FORMAT.format(
+                            timestamp, PRIVATE_API_KEY,
+                            PUBLIC_API_KEY
+                        ).toMD5()
+                    )
+                    .build()
+                chain.proceed(chainRequest.newBuilder().url(httpUrl).build())
+            }
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .build()
