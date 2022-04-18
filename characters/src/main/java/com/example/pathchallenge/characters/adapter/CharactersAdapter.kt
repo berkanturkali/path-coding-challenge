@@ -1,13 +1,18 @@
 package com.example.pathchallenge.characters.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pathchallenge.characters.databinding.CharacterItemBinding
+import com.example.pathchallenge.common.ItemClickListener
 import com.example.pathchallenge.core.domain.model.characters.Character
 
 class CharactersAdapter :
-    PagingDataAdapter<Character, RecyclerView.ViewHolder>(CharacterComparator) {
+    PagingDataAdapter<Character, CharactersAdapter.CharactersViewHolder>(CharacterComparator) {
+
+    private lateinit var listener: ItemClickListener<Character>
 
 
     object CharacterComparator : DiffUtil.ItemCallback<Character>() {
@@ -20,12 +25,42 @@ class CharactersAdapter :
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    fun setListener(listener: ItemClickListener<Character>) {
+        this.listener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+    inner class CharactersViewHolder(private val binding: CharacterItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    item?.let {
+                        listener.onItemClick(it)
+                    }
+                }
+            }
+        }
+
+        fun bind(item: Character) {
+            binding.apply {
+                //load image
+                characterName.text = item.name
+            }
+        }
     }
+
+    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
+        val item = getItem(position)
+        item?.let {
+            holder.bind(it)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder =
+        CharactersViewHolder(
+            CharacterItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 }
 
