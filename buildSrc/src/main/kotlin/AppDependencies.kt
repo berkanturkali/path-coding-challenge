@@ -1,5 +1,4 @@
 import Dependencies.DB.Version.room_version
-import Dependencies.Network.Version.gson_version
 import Dependencies.View.Version.glideVersion
 
 interface Libraries {
@@ -68,28 +67,27 @@ object Dependencies {
         object Version {
             const val okhttp: String = "4.9.0"
             const val retrofit: String = "2.9.0"
-            const val gson_version = "2.8.7"
+            const val moshi: String = "1.13.0"
             const val paging = "3.0.1"
         }
 
         const val paging = "androidx.paging:paging-runtime:${Version.paging}"
         const val pagingCommon = "androidx.paging:paging-common-ktx:${Version.paging}"
-        private const val okhttp: String = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
-        private const val loggingInterceptor: String =
+        const val okhttp: String = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
+        const val loggingInterceptor: String =
             "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
-        private const val retrofit: String = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-        const val gson_converter: String =
-            "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
-        const val gson = "com.google.code.gson:gson:$gson_version"
+        const val retrofit: String = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+        const val retrofitMoshi: String =
+            "com.squareup.retrofit2:converter-moshi:${Version.retrofit}"
+        const val moshi: String = "com.squareup.moshi:moshi-kotlin:${Version.moshi}"
 
         override val components: List<String> = listOf(
-            okhttp, loggingInterceptor, retrofit, gson_converter, gson
+            okhttp, loggingInterceptor, retrofit, retrofitMoshi, moshi
         )
     }
 
     object DI {
         object Version {
-            const val javaxInject: String = "1"
             const val daggerHilt: String = "2.38.1"
             const val hiltFragment: String = "1.0.0"
         }
@@ -99,16 +97,16 @@ object Dependencies {
                 "com.google.dagger:hilt-compiler:${Version.daggerHilt}"
         }
 
-        const val javaxInject: String = "javax.inject:javax.inject:${Version.javaxInject}"
         const val daggerHiltAndroid: String =
             "com.google.dagger:hilt-android:${Version.daggerHilt}"
+        const val hiltCore: String = "com.google.dagger:hilt-core:${Version.daggerHilt}"
         const val hiltFragment: String =
             "androidx.hilt:hilt-navigation-fragment:${Version.hiltFragment}"
     }
 
     object Coroutines : Libraries {
         object Version {
-            const val coroutines: String = "1.4.2"
+            const val coroutines: String = "1.5.2"
         }
 
         const val core: String =
