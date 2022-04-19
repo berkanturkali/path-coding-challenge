@@ -5,8 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.pathchallenge.core.cache.DummyData
 import com.example.pathchallenge.core.cache.abstraction.CharactersCache
-import com.example.pathchallenge.core.cache.db.MarvelCharactersDb
-import com.example.pathchallenge.core.cache.model.CharacterWithComics
+import com.example.pathchallenge.core.cache.db.MarvelDb
 import com.google.common.truth.Truth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -20,7 +19,7 @@ import org.junit.runner.RunWith
 )
 class CharactersCacheImplTest {
 
-    private lateinit var marvelDb: MarvelCharactersDb
+    private lateinit var marvelDb: MarvelDb
 
     private lateinit var cache: CharactersCache
 
@@ -28,26 +27,63 @@ class CharactersCacheImplTest {
     fun setup() {
         marvelDb = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            MarvelCharactersDb::class.java
+            MarvelDb::class.java
         )
             .allowMainThreadQueries().build()
 
-        cache = CharactersCacheImpl(marvelDb.comicsDao)
+        cache = CharactersCacheImpl(marvelDb.charactersDao)
     }
 
+    @Test
+    fun upsert_insertsData_when_dataIsNotInCache() {
+        runBlocking {
+            val entity = DummyData.charEntity
+            val entities = cache.characters().first()
+            Truth.assertThat(entities).isEmpty()
+            cache.upsert(entity)
+            val newEntities = cache.characters().first()
+            Truth.assertThat(newEntities).isNotNull()
+            Truth.assertThat(newEntities.size).isEqualTo(1)
+            Truth.assertThat(newEntities.first().id).isEqualTo(entity.id)
+        }
+    }
 
     @Test
-    fun insertCharacterWithComics_insertsData_Successfully() {
+    fun upsert_updatesData_when_dataIsAlreadyInCache() {
         runBlocking {
-            val comics = listOf(DummyData.comic)
-            val character = DummyData.characterEntity
-            val charWithComics = CharacterWithComics(comics = comics, characterEntity = character)
-            Truth.assertThat(cache.getComics(character.id).first()).isEmpty()
-            cache.insertCharacterWithComics(charWithComics)
-            val newEntities = cache.getComics(character.id).first()
-            Truth.assertThat(newEntities).isNotEmpty()
-            Truth.assertThat(newEntities.first().comics.first().characterId).isEqualTo(character.id)
-            Truth.assertThat(newEntities.first().comics.size).isEqualTo(comics.size)
+            val entity = DummyData.charEntity
+            cache.upsert(entity)
+            val entities = cache.characters().first()
+            Truth.assertThat(entities).isNotEmpty()
+            val newEntity = entity.copy(name = "Dummy")
+            cache.upsert(newEntity)
+            val newData = cache.characters().first()
+            Truth.assertThat(newData).isNotEmpty()
+            Truth.assertThat(newData.first().id).isEqualTo(entity.id)
+            Truth.assertThat(newData.first().name).isNotEqualTo(entity.name)
+        }
+    }
+
+    @Test
+    fun delete_deletesData_correctly() {
+        runBlocking {
+            val entity = DummyData.charEntity
+            cache.upsert(entity)
+            Truth.assertThat(cache.characters().first()).isNotEmpty()
+            cache.delete(entity)
+            Truth.assertThat(cache.characters().first()).isEmpty()
+        }
+    }
+
+    @Test
+    fun character_getsData_correctly() {
+        runBlocking {
+            val entity = cache.character(1)
+            Truth.assertThat(entity).isNull()
+            val newEntity = DummyData.charEntity
+            cache.upsert(newEntity)
+            val new = cache.character(newEntity.id)
+            Truth.assertThat(new).isNotNull()
         }
     }
 

@@ -1,3 +1,4 @@
+import ProjectLib.common
 import ProjectLib.remote
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     daggerHilt
     parcelize
 }
+
 android.defaultConfig.javaCompileOptions {
     annotationProcessorOptions {
         arguments += Pair("room.incremental", "true")
@@ -12,12 +14,14 @@ android.defaultConfig.javaCompileOptions {
 }
 android.defaultConfig.buildConfigField("int", "databaseVersion", 1.toString())
 android.defaultConfig.buildConfigField("String", "databaseName", "\"marvel_db\"")
+
 android.defaultConfig.buildConfigField("String", "BASE_URL", "\"https://gateway.marvel.com/\"")
 
 dependencies {
 
     //project lib
     implementation(project(remote))
+    implementation(project(common))
 
     //network
     implementation(Dependencies.Network.retrofit)

@@ -4,6 +4,7 @@ import ProjectLib.core
 plugins {
     androidLib
     daggerHilt
+    safeArgs
 }
 
 dependencies {

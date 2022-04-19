@@ -1,7 +1,8 @@
 package com.example.pathchallenge
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -23,16 +24,25 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupNavigation()
     }
-    private fun setupNavigation(){
+
+    private fun setupNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         val appBarConfiguration =
-            AppBarConfiguration(setOf(com.example.pathchallenge.characters.R.id.charactersFragment))
+            AppBarConfiguration(
+                setOf(
+                    com.example.pathchallenge.characters.R.id.charactersFragment,
+                    R.id.favoritesFragment
+                )
+            )
         binding.toolbar
             .setupWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbarTitle.text = destination.label
+            binding.bottomNavigationView.isVisible =
+                appBarConfiguration.topLevelDestinations.contains(destination.id)
         }
     }
 }

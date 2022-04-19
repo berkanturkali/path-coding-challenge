@@ -1,22 +1,27 @@
 package com.example.pathchallenge.core.cache.implementation
 
 import com.example.pathchallenge.core.cache.abstraction.CharactersCache
-import com.example.pathchallenge.core.cache.dao.ComicsDao
-import com.example.pathchallenge.core.cache.model.CharacterWithComics
+import com.example.pathchallenge.core.cache.dao.CharactersDao
+import com.example.pathchallenge.core.cache.model.CharacterEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CharactersCacheImpl @Inject constructor(
-    private val dao: ComicsDao
+    private val dao: CharactersDao
 ) : CharactersCache {
-
-    override suspend fun insertCharacterWithComics(
-        characterWithComics: CharacterWithComics
-    ) {
-        return dao.insertCharacterWithComics(characterWithComics)
+    override suspend fun upsert(characterEntity: CharacterEntity): Long {
+        return dao.upsert(characterEntity)
     }
 
-    override fun getComics(characterId: Int): Flow<List<CharacterWithComics>> {
-        return dao.getComics(characterId)
+    override fun characters(): Flow<List<CharacterEntity>> {
+        return dao.characters()
+    }
+
+    override suspend fun delete(favoriteEntity: CharacterEntity) {
+        dao.delete(favoriteEntity)
+    }
+
+    override suspend fun character(id: Int): CharacterEntity? {
+        return dao.character(id)
     }
 }

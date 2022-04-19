@@ -1,6 +1,7 @@
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.PluginContainer
+import org.gradle.internal.impldep.junit.runner.Version.id
 import org.gradle.kotlin.dsl.apply
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
@@ -48,6 +49,8 @@ val PluginDependenciesSpec.kotlinLib: PluginDependencySpec
 val PluginDependenciesSpec.ktlint: PluginDependencySpec
     get() = id("ktlint")
 
+val PluginDependenciesSpec.safeArgs: PluginDependencySpec
+    get() = id("androidx.navigation.safeargs.kotlin")
 
 val Project.applyKtlint
     get() = apply(plugin = "ktlint")

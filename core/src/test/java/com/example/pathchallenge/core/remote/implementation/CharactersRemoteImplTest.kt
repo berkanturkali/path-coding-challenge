@@ -51,8 +51,8 @@ class CharactersRemoteImplTest {
             val comics = charactersRemote.fetchComics(CHAR_ID)
             val response = getComicsResponse(COMICS_RESPONSE_PATH)
             Truth.assertThat(comics).isEqualTo(response)
-            Truth.assertThat(comics.data.results.size).isEqualTo(response.data.results.size)
-            Truth.assertThat(comics.data.results).isNotEmpty()
+//            Truth.assertThat(comics.data.results.size).isEqualTo(response.data.results.size)
+//            Truth.assertThat(comics.data.results).isNotEmpty()
         }
     }
 

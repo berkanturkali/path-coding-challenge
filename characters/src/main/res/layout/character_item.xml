@@ -3,36 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     app:cardCornerRadius="@dimen/dimen_16"
+    android:theme="@style/Theme.PathChallenge.CardStyle"
     app:cardElevation="@dimen/dimen_4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/character_image"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:contentDescription="char_image"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/character_name"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            style="@style/Theme.PathChallenge.CardStyle"
             android:gravity="center"
+            android:maxLines="2"
+            android:textStyle="bold"
             android:padding="@dimen/dimen_8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/character_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_image"
             tools:text="Character name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

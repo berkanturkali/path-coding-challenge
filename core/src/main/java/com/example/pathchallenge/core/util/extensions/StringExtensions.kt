@@ -1,4 +1,4 @@
-package com.example.pathchallenge.extensions
+package com.example.pathchallenge.core.util.extensions
 
 import java.security.MessageDigest
 

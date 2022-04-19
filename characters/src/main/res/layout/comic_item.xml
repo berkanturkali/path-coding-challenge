@@ -2,33 +2,38 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="170dp"
+    android:layout_height="200dp"
     android:layout_margin="@dimen/dimen_8"
+    android:theme="@style/Theme.PathChallenge.CardStyle"
     app:cardCornerRadius="@dimen/dimen_8"
     app:cardElevation="@dimen/dimen_4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/comic_image"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/comic_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/comic_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.CardTitle"
+            android:layout_height="0dp"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="3"
             android:padding="@dimen/dimen_8"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@ package com.example.pathchallenge.core.di
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.example.pathchallenge.core.R
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +21,7 @@ interface GlideModule {
             circularProgressDrawable.setColorSchemeColors(
                 ContextCompat.getColor(
                     context,
-                    androidx.appcompat.R.color.abc_background_cache_hint_selector_material_dark
+                    com.example.pathchallenge.common.R.color.on_primary
                 )
             )
             circularProgressDrawable.start()

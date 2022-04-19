@@ -2,10 +2,13 @@ package com.example.pathchallenge.characters.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pathchallenge.characters.adapter.CharactersAdapter
 import com.example.pathchallenge.characters.adapter.CharactersLoadStateAdapter
 import com.example.pathchallenge.characters.databinding.FragmentCharactersBinding
@@ -33,8 +36,7 @@ class CharactersFragment :
         initAdapter()
         initSwipeToRefresh()
         binding.charactersList.apply {
-            adapter = mAdapter
-            setItemDecorationSpacing(50)
+            setItemDecorationSpacing(40)
         }
         subscribeObservers()
     }
@@ -45,10 +47,22 @@ class CharactersFragment :
             binding.retryButton.setOnClickListener {
                 retry()
             }
-            withLoadStateHeaderAndFooter(
-                header = CharactersLoadStateAdapter { mAdapter.retry() },
-                footer = CharactersLoadStateAdapter { mAdapter.retry() },
+            val headerFooterAdapter = CharactersLoadStateAdapter(mAdapter::retry)
+
+            val concatAdapter = mAdapter.withLoadStateFooter(
+                footer = headerFooterAdapter
             )
+            binding.charactersList.adapter = concatAdapter
+            (binding.charactersList.layoutManager as GridLayoutManager).spanSizeLookup =
+                object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return if (position == mAdapter.itemCount && headerFooterAdapter.itemCount > 0) {
+                            2
+                        } else {
+                            1
+                        }
+                    }
+                }
             addLoadStateListener { loadState ->
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && itemCount == 0
                 showList(!isListEmpty)
@@ -59,8 +73,20 @@ class CharactersFragment :
     }
 
     private fun initSwipeToRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
-            mAdapter.refresh()
+        binding.swipeRefresh.apply {
+            setOnRefreshListener {
+                mAdapter.refresh()
+            }
+            setColorSchemeColors(
+                ContextCompat.getColor(
+                    requireContext(),
+                    com.example.pathchallenge.common.R.color.primary
+                ),
+                ContextCompat.getColor(
+                    requireContext(),
+                    com.example.pathchallenge.common.R.color.on_primary
+                )
+            )
         }
     }
 
@@ -81,6 +107,7 @@ class CharactersFragment :
     }
 
     override fun onItemClick(item: Character) {
-
+        val action = CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment(item)
+        findNavController().navigate(action)
     }
 }

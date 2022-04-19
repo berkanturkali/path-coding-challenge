@@ -24,4 +24,9 @@
             android:name="character"
             app:argType="com.example.pathchallenge.core.domain.model.characters.Character" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.pathchallenge.favorites.view.FavoritesFragment"
+        android:label=""
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
