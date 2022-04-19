@@ -33,13 +33,16 @@ object Dependencies {
 
     object Navigation : Libraries {
         object Version {
-            const val navigation: String = "2.4.1"
+            const val navigation: String = "2.4.2"
+            const val fragment = "1.4.1"
         }
 
         const val navigationFragmentKtx: String =
             "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
         const val navigationUiKtx: String =
             "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
+        const val fragmentKtx: String = "androidx.fragment:fragment-ktx:${Version.fragment}"
+
         override val components: List<String>
             get() = listOf(
                 navigationFragmentKtx, navigationUiKtx
@@ -156,6 +159,7 @@ object Dependencies {
             const val mockK_version = "1.12.2"
             const val truth = "1.1.3"
             const val coroutines: String = "1.5.2"
+            const val roboElectric: String = "4.6"
         }
 
         const val junit = "junit:junit:${Version.junit_version}"
@@ -167,5 +171,6 @@ object Dependencies {
         const val truth = "com.google.truth:truth:${Version.truth}"
         const val coroutines =
             "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
+        const val roboElectric = "org.robolectric:robolectric:${Version.roboElectric}"
     }
 }

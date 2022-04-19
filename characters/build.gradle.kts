@@ -21,4 +21,11 @@ dependencies {
 
     //fragment-ktx
     implementation(Dependencies.AndroidX.fragmentKtx)
+
+    //swipe-refresh
+    implementation(Dependencies.View.swipeRefreshLayout)
+
+
+    implementation(Dependencies.Navigation.navigationFragmentKtx)
+    implementation(Dependencies.Navigation.navigationUiKtx)
 }

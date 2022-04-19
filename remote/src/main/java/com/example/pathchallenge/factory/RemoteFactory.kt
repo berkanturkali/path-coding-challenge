@@ -48,7 +48,7 @@ public class RemoteFactory @Inject constructor(
                 val chainRequest = chain.request()
                 val originalUrl = chainRequest.url
                 val httpUrl = originalUrl.newBuilder()
-                    .addQueryParameter("apiKey", PUBLIC_API_KEY)
+                    .addQueryParameter("apikey", PUBLIC_API_KEY)
                     .addQueryParameter("ts", System.currentTimeMillis().toString())
                     .addQueryParameter(
                         "hash", HASH_FORMAT.format(

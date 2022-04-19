@@ -22,6 +22,9 @@ dependencies {
     //paging 3
     implementation(Dependencies.Paging.paging)
 
+    //swipe-refresh
+    implementation(Dependencies.View.swipeRefreshLayout)
+
 
     /* test */
     testImplementation(Dependencies.Test.mockWebServer)

@@ -5,11 +5,16 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.pathchallenge.characters.databinding.CharacterItemBinding
 import com.example.pathchallenge.common.ItemClickListener
+import com.example.pathchallenge.common.exts.load
 import com.example.pathchallenge.core.domain.model.characters.Character
+import javax.inject.Inject
 
-class CharactersAdapter :
+class CharactersAdapter @Inject constructor(
+    private val circularProgressDrawable: CircularProgressDrawable
+) :
     PagingDataAdapter<Character, CharactersAdapter.CharactersViewHolder>(CharacterComparator) {
 
     private lateinit var listener: ItemClickListener<Character>
@@ -45,7 +50,10 @@ class CharactersAdapter :
 
         fun bind(item: Character) {
             binding.apply {
-                //load image
+                characterImage.load(
+                    item.imageUrl,
+                    circularProgressDrawable = circularProgressDrawable
+                )
                 characterName.text = item.name
             }
         }

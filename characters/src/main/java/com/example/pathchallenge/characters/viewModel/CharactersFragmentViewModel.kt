@@ -13,5 +13,5 @@ class CharactersFragmentViewModel @Inject constructor(
     private val repo: CharactersRepository
 ) : ViewModel() {
 
-    val characters = repo.fetchCharacters().cachedIn(viewModelScope).asLiveData()
+    val characters = repo.fetchCharacters().cachedIn(viewModelScope)
 }
