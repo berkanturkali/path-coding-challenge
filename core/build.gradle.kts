@@ -3,6 +3,7 @@ import ProjectLib.remote
 plugins {
     androidLib
     daggerHilt
+    parcelize
 }
 android.defaultConfig.buildConfigField("String", "BASE_URL", "\"https://gateway.marvel.com/\"")
 
