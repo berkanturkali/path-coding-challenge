@@ -1,0 +1,10 @@
+package com.example.pathchallenge.core.cache.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "characters")
+data class CharacterEntity(
+    @PrimaryKey(autoGenerate = false)
+    val id: Int
+)

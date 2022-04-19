@@ -5,6 +5,13 @@ plugins {
     daggerHilt
     parcelize
 }
+android.defaultConfig.javaCompileOptions {
+    annotationProcessorOptions {
+        arguments += Pair("room.incremental", "true")
+    }
+}
+android.defaultConfig.buildConfigField("int", "databaseVersion", 1.toString())
+android.defaultConfig.buildConfigField("String", "databaseName", "\"marvel_db\"")
 android.defaultConfig.buildConfigField("String", "BASE_URL", "\"https://gateway.marvel.com/\"")
 
 dependencies {
@@ -26,6 +33,11 @@ dependencies {
     //swipe-refresh
     implementation(Dependencies.View.swipeRefreshLayout)
 
+    //room
+    implementation(Dependencies.DB.roomKtx)
+    implementation(Dependencies.DB.roomRuntime)
+    kapt(Dependencies.DB.roomCompiler)
+
 
     /* test */
     testImplementation(Dependencies.Test.mockWebServer)
@@ -34,4 +46,6 @@ dependencies {
     testImplementation(Dependencies.Network.moshi)
     testImplementation(Dependencies.Test.coroutines)
     testImplementation(Dependencies.Test.mockk)
+
+    androidTestImplementation(Dependencies.Test.truth)
 }

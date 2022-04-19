@@ -1,6 +1,6 @@
 package com.example.pathchallenge.core.remote.model.comics
 
-data class Comic(
+data class ComicDto(
     val id: Int,
     val thumbnail: Thumbnail,
     val title: String,

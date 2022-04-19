@@ -8,6 +8,7 @@ import com.example.pathchallenge.core.data.repository.abstraction.CharactersRepo
 import com.example.pathchallenge.core.domain.model.characters.Character
 import com.example.pathchallenge.core.remote.abstraction.CharactersRemote
 import com.example.pathchallenge.core.remote.mapper.characters.CharacterMapper
+import com.example.pathchallenge.core.remote.model.comics.ComicDto
 import com.example.pathchallenge.core.remote.pagination.CharactersPagingSource
 import com.example.pathchallenge.core.util.Constants.LIMIT
 import kotlinx.coroutines.flow.Flow
