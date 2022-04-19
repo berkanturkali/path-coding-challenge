@@ -1,6 +1,7 @@
 package com.example.pathchallenge.core.remote.utils
 
 import com.example.pathchallenge.core.remote.model.characters.CharactersResponse
+import com.example.pathchallenge.core.remote.model.comics.ComicsResponse
 import com.example.pathchallenge.core.remote.service.ApiService
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -14,6 +15,7 @@ import java.lang.reflect.ParameterizedType
 import java.nio.file.Paths
 
 internal const val CHARACTERS_PATH: String = "/v1/public/characters"
+internal const val COMICS_PATH: String = "$CHARACTERS_PATH/$CHAR_ID/comics"
 private val okHttpClient: OkHttpClient
     get() = OkHttpClient.Builder().build()
 
@@ -29,6 +31,16 @@ internal val charactersResponseAdapter: JsonAdapter<CharactersResponse>
         )
         return moshi.adapter(type)
     }
+
+internal val comicsResponseAdapter: JsonAdapter<ComicsResponse>
+    get() {
+        val type: ParameterizedType = Types.newParameterizedType(
+            ComicsResponse::class.java,
+            String::class.java
+        )
+        return moshi.adapter(type)
+    }
+
 
 internal fun getJson(path: String): String {
     val file = Paths.get("src", "test", "resources", path).toFile()

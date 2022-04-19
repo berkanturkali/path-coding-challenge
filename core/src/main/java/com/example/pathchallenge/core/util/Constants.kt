@@ -8,8 +8,8 @@ object Constants {
     const val BASE_URL = BuildConfig.BASE_URL
 
     /* endpoints */
-    const val characters = "/v1/public/characters"
-    const val character_comics = "/v1/public/characters/{characterId}/comics"
+    const val CHARACTERS = "/v1/public/characters"
+    const val CHARACTERS_COMICS = "$CHARACTERS/{characterId}/comics"
 
     //load size
     const val LIMIT = 30

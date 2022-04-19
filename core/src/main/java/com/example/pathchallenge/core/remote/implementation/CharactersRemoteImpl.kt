@@ -2,6 +2,7 @@ package com.example.pathchallenge.core.remote.implementation
 
 import com.example.pathchallenge.core.remote.abstraction.CharactersRemote
 import com.example.pathchallenge.core.remote.model.characters.CharactersResponse
+import com.example.pathchallenge.core.remote.model.comics.ComicsResponse
 import com.example.pathchallenge.core.remote.service.ApiService
 import javax.inject.Inject
 
@@ -18,4 +19,7 @@ class CharactersRemoteImpl @Inject constructor(
         )
     }
 
+    override suspend fun fetchComics(id: Int): ComicsResponse {
+        return apiService.fetchComics(id)
+    }
 }
