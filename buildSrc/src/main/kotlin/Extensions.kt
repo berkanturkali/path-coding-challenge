@@ -30,6 +30,10 @@ internal val PluginContainer.safeArgs: Unit
     get() {
         apply("androidx.navigation.safeargs.kotlin")
     }
+internal val PluginContainer.gms: Unit
+    get() {
+        apply("com.google.gms.google-services")
+    }
 
 val PluginDependenciesSpec.daggerHilt: PluginDependencySpec
     get() = id("dagger.hilt.android.plugin")

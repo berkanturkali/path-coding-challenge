@@ -10,6 +10,7 @@ import implementation
 import kotlinAndroid
 import kotlinKapt
 import testImplementation
+import gms
 
 class AndroidLibraryPlugin : BasePlugin() {
     override val pluginConfig: PluginConfig
@@ -17,6 +18,7 @@ class AndroidLibraryPlugin : BasePlugin() {
             androidModule
             kotlinAndroid
             kotlinKapt
+            gms
         }
     override val libraryConfig: LibraryConfig
         get() = {

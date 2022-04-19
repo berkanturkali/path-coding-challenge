@@ -4,6 +4,7 @@ import ProjectLib.core
 import ProjectLib.remote
 
 plugins {
+    id("com.google.gms.google-services")
     androidApp
     daggerHilt
 }
@@ -31,6 +32,7 @@ dependencies {
 
     //hilt
     implementation(Dependencies.DI.daggerHiltAndroid)
+    implementation("com.google.firebase:firebase-analytics-ktx:20.1.2")
     kapt(Dependencies.DI.AnnotationProcessor.daggerHilt)
 
     //timber

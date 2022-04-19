@@ -54,6 +54,7 @@ object Plugin {
         const val navigation: String = "2.4.1"
         const val daggerHiltAndroid: String = "2.38.1"
         const val ktlint = "10.2.1"
+        const val gmsServices = "4.3.10"
     }
 
     const val kotlin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
@@ -63,6 +64,7 @@ object Plugin {
     const val daggerHilt: String =
         "com.google.dagger:hilt-android-gradle-plugin:${Version.daggerHiltAndroid}"
     const val ktlint: String = "org.jlleitschuh.gradle:ktlint-gradle:${Version.ktlint}"
+    const val gms = "com.google.gms:google-services:${Build_gradle.Plugin.Version.gmsServices}"
 }
 
 dependencies {
@@ -71,4 +73,5 @@ dependencies {
     implementation(Plugin.navigationSafeArgs)
     implementation(Plugin.daggerHilt)
     implementation(Plugin.ktlint)
+    implementation(Plugin.gms)
 }
