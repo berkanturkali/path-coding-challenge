@@ -1,5 +1,9 @@
 package com.example.pathchallenge.core.cache.mapper.base
 
+/**
+ * Base Entity Mapper interface
+ * that maps [E] to [T] or vice versa.
+ */
 interface EntityMapper<E, T> {
 
     fun mapFromEntity(entity: E): T

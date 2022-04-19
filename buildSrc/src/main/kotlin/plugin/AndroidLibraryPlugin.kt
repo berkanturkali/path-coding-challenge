@@ -29,6 +29,7 @@ class AndroidLibraryPlugin : BasePlugin() {
                 Dependencies.Test.junitExt,
                 Dependencies.Test.espresso
             )
+            implementation("com.google.firebase:firebase-analytics-ktx:20.1.2")
         }
     override val extensions: Array<ProjectExtension>
         get() = arrayOf(ProjectExtension.AndroidLib)

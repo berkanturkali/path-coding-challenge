@@ -1,5 +1,6 @@
 package com.example.pathchallenge.common.exts
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -32,4 +33,8 @@ fun Fragment.showSnack(message: String, color: Int = R.color.primary) {
     Snackbar.make(this.requireView(), message, Snackbar.LENGTH_LONG)
         .setBackgroundTint(ContextCompat.getColor(this.requireContext(), color))
         .show()
+}
+
+fun View.show(show: Boolean) {
+    visibility = if (show) View.VISIBLE else View.GONE
 }

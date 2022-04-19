@@ -3,13 +3,15 @@ package com.example.pathchallenge.core.remote.pagination
 import androidx.paging.PagingSource
 import com.example.pathchallenge.core.remote.abstraction.CharactersRemote
 import com.example.pathchallenge.core.remote.implementation.CharactersRemoteImpl
+import com.example.pathchallenge.core.remote.utils.*
+import com.example.pathchallenge.core.remote.utils.HASH
 import com.example.pathchallenge.core.remote.utils.LIMIT
 import com.example.pathchallenge.core.remote.utils.OFFSET
-import com.example.pathchallenge.core.remote.utils.RequestDispatcher
 import com.example.pathchallenge.core.remote.utils.makeApiService
 import com.google.common.truth.Truth
 import io.mockk.coEvery
 import io.mockk.mockk
+import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -31,8 +33,8 @@ class CharactersPagingSourceTest {
 
     @Test
     fun `check that prev and next keys are correct`() = runBlocking {
-        val pagingSource = CharactersPagingSource(charactersRemote)
-        val characters = charactersRemote.fetchCharacters(0, 30)
+        val pagingSource = CharactersPagingSource(charactersRemote,TS, HASH)
+        val characters = charactersRemote.fetchCharacters(0, 30,TS, HASH)
         Truth.assertThat(
             PagingSource.LoadResult.Page(
                 data = characters.data.results,
@@ -53,7 +55,7 @@ class CharactersPagingSourceTest {
     @Test
     fun `check that prev and next keys are correct when there is no data`() =
         runBlocking {
-            val pagingSource = CharactersPagingSource(charactersRemote)
+            val pagingSource = CharactersPagingSource(charactersRemote,TS, HASH)
             Truth.assertThat(
                 PagingSource.LoadResult.Page(
                     data = emptyList(),
@@ -74,8 +76,8 @@ class CharactersPagingSourceTest {
     @Test
     fun `check that paging source returns error when error occurs`() = runBlocking {
         val charactersRemote = mockk<CharactersRemote>()
-        coEvery { charactersRemote.fetchCharacters(OFFSET, LIMIT) } throws Exception()
-        val pagingSource = CharactersPagingSource(charactersRemote)
+        coEvery { charactersRemote.fetchCharacters(OFFSET, LIMIT, TS, HASH) } throws Exception()
+        val pagingSource = CharactersPagingSource(charactersRemote,TS, HASH)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(

@@ -12,7 +12,7 @@ class CharacterMapper @Inject constructor() : RemoteModelMapper<CharacterDto, Ch
         return Character(
             id = model.id,
             name = model.name,
-            imageUrl =mapImageUrl(model.thumbnail),
+            imageUrl = mapImageUrl(model.thumbnail),
             description = model.description
         )
     }

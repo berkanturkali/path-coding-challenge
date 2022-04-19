@@ -12,6 +12,7 @@ import com.example.pathchallenge.characters.adapter.ComicsAdapter
 import com.example.pathchallenge.characters.databinding.FragmentCharacterDetailBinding
 import com.example.pathchallenge.common.BaseFragment
 import com.example.pathchallenge.common.exts.load
+import com.example.pathchallenge.common.exts.show
 import com.example.pathchallenge.common.exts.showSnack
 import com.example.pathchallenge.core.domain.model.characters.Character
 import com.example.pathchallenge.core.domain.model.comics.Comic
@@ -35,10 +36,9 @@ class DetailsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeObservers()
         initButtons()
+        subscribeObservers()
     }
-
 
     private fun subscribeObservers() {
         mViewModel.character.observe(viewLifecycleOwner) {
@@ -49,6 +49,7 @@ class DetailsFragment :
                 is Resource.Error -> {
                     showSnack(it.error!!)
                     showComicsRetryButton(true)
+                    showComicsProgress(false)
                 }
                 is Resource.Loading -> {
                     showComicsProgress(true)
@@ -69,7 +70,7 @@ class DetailsFragment :
                     binding.favButton.setOnCheckedChangeListener(null)
                     binding.favButton.isChecked = true
                     binding.favButton.setOnCheckedChangeListener(this)
-                }else{
+                } else {
                     binding.favButton.setOnCheckedChangeListener(this)
                 }
             }
@@ -77,7 +78,7 @@ class DetailsFragment :
     }
 
     private fun showComicsProgress(show: Boolean) {
-        binding.comicsProgress.visibility = if (show) View.VISIBLE else View.GONE
+        binding.comicsProgress.show(show)
     }
 
     private fun initButtons() {
@@ -87,7 +88,7 @@ class DetailsFragment :
     }
 
     private fun showComicList(show: Boolean) {
-        binding.comicsSection.visibility = if (show) View.VISIBLE else View.GONE
+        binding.comicsSection.visibility = if(show) View.VISIBLE else View.INVISIBLE
     }
 
     private fun bindComics(data: List<Comic>) {
@@ -101,7 +102,7 @@ class DetailsFragment :
     }
 
     private fun showComicsRetryButton(show: Boolean) {
-        binding.retryCommicButton.visibility = if (show) View.VISIBLE else View.GONE
+        binding.retryCommicButton.show(show)
     }
 
     private fun bindCharacter(character: Character) {

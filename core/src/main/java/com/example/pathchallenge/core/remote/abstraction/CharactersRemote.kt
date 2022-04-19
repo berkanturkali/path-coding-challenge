@@ -8,10 +8,14 @@ interface CharactersRemote {
 
     suspend fun fetchCharacters(
         offset: Int,
-        limit: Int
+        limit: Int,
+        ts:String,
+        hash:String
     ): CharactersResponse
 
     suspend fun fetchComics(
-        id: Int
+        id: Int,
+        ts:String,
+        hash:String
     ): Response<ComicsResponse>
 }

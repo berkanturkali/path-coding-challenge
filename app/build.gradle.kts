@@ -4,7 +4,6 @@ import ProjectLib.core
 import ProjectLib.remote
 
 plugins {
-    id("com.google.gms.google-services")
     androidApp
     daggerHilt
 }

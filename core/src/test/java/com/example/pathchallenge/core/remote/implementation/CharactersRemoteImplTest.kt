@@ -28,7 +28,7 @@ class CharactersRemoteImplTest {
     @Test
     fun `check that fetch character returns data successfully`() {
         runBlocking {
-            val characters = charactersRemote.fetchCharacters(OFFSET, LIMIT)
+            val characters = charactersRemote.fetchCharacters(OFFSET, LIMIT, TS, HASH)
             val response = getCharactersResponse(CHARACTERS_RESPONSE_PATH)
             Truth.assertThat(characters.data.results).isNotEmpty()
             Truth.assertThat(characters.data.results.size).isEqualTo(response.data.results.size)
@@ -39,7 +39,7 @@ class CharactersRemoteImplTest {
     @Test
     fun `check that fetch characters makes a GET request`() {
         runBlocking {
-            charactersRemote.fetchCharacters(OFFSET, LIMIT)
+            charactersRemote.fetchCharacters(OFFSET, LIMIT, TS, HASH)
             Truth.assertThat("GET $CHARACTERS_FULL_PATH HTTP/1.1")
                 .isEqualTo(mockWebServer.takeRequest().requestLine)
         }
@@ -48,18 +48,16 @@ class CharactersRemoteImplTest {
     @Test
     fun `check that fetch comics returns data successfully`() {
         runBlocking {
-            val comics = charactersRemote.fetchComics(CHAR_ID)
+            val comics = charactersRemote.fetchComics(CHAR_ID, TS, HASH)
             val response = getComicsResponse(COMICS_RESPONSE_PATH)
             Truth.assertThat(comics).isEqualTo(response)
-//            Truth.assertThat(comics.data.results.size).isEqualTo(response.data.results.size)
-//            Truth.assertThat(comics.data.results).isNotEmpty()
         }
     }
 
     @Test
     fun `check that fetch comics makes a GET request`() {
         runBlocking {
-            charactersRemote.fetchComics(CHAR_ID)
+            charactersRemote.fetchComics(CHAR_ID, TS, HASH)
             Truth.assertThat("GET $COMICS_FULL_PATH HTTP/1.1")
                 .isEqualTo(mockWebServer.takeRequest().requestLine)
         }

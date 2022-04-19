@@ -17,6 +17,7 @@ import com.example.pathchallenge.common.BaseFragment
 import com.example.pathchallenge.common.ItemClickListener
 import com.example.pathchallenge.common.exts.setItemDecorationSpacing
 import com.example.pathchallenge.core.domain.model.characters.Character
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -84,7 +85,7 @@ class CharactersFragment :
                 ),
                 ContextCompat.getColor(
                     requireContext(),
-                    com.example.pathchallenge.common.R.color.on_primary
+                    com.example.pathchallenge.common.R.color.secondary
                 )
             )
         }

@@ -9,6 +9,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * Factory class that creates [Retrofit] instance.
+ */
 public class RemoteFactory @Inject constructor(
     private val moshi: Moshi,
 ) {

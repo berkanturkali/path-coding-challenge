@@ -1,5 +1,9 @@
 package com.example.pathchallenge.mapper
 
+/**
+ * Base Remote Model Mapper
+ * that maps [M] to [D]
+ */
 public interface RemoteModelMapper<in M, out D> {
     public fun mapFromModel(model: M): D
 

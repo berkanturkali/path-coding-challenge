@@ -1,6 +1,7 @@
 package com.example.pathchallenge.core.remote.utils
 
 import com.example.pathchallenge.core.util.Constants.DATE_RANGE
+import com.example.pathchallenge.core.util.Constants.PUBLIC_API_KEY
 
 internal const val LIMIT = 30
 internal const val OFFSET = 0
@@ -17,7 +18,7 @@ internal const val COMICS_RESPONSE_PATH = "response/comics_response.json"
 
 //queries
 internal const val CHARACTERS_QUERIES =
-    "?offset=$OFFSET&limit=$LIMIT"
+    "?apikey=$PUBLIC_API_KEY&ts=$TS&hash=$HASH&offset=$OFFSET&limit=$LIMIT"
 internal val RANGE = DATE_RANGE
 
 //paths

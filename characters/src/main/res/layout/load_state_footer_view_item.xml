@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:theme="@style/Theme.PathChallenge"
-    android:padding="8dp">
+    android:padding="@dimen/dimen_8"
+    android:theme="@style/Theme.PathChallenge">
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/error_msg"
-        android:textSize="16sp"
-        android:textColor="@color/primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        tools:text="Timeout"/>
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        android:text="@string/timeout"
+        tools:text="Timeout" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@style/Theme.PathChallenge.ProgressbarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/retry_button"
-        android:layout_width="wrap_content"
         style="@style/Theme.PathChallenge.ButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/retry"/>
+        android:text="@string/retry" />
 </LinearLayout>

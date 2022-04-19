@@ -8,6 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.pathchallenge.R.id.favoritesFragment
+import com.example.pathchallenge.R.id.nav_host_fragment_container
+import com.example.pathchallenge.characters.R.id.charactersFragment
 import com.example.pathchallenge.databinding.ActivityMainBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -32,13 +35,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         val appBarConfiguration =
             AppBarConfiguration(
                 setOf(
-                    com.example.pathchallenge.characters.R.id.charactersFragment,
-                    R.id.favoritesFragment
+                    charactersFragment,
+                    favoritesFragment
                 )
             )
         binding.toolbar

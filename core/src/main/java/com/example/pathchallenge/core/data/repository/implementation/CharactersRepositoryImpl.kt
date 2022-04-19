@@ -15,7 +15,9 @@ import com.example.pathchallenge.core.remote.mapper.characters.CharacterMapper
 import com.example.pathchallenge.core.remote.mapper.comics.ComicModelMapper
 import com.example.pathchallenge.core.remote.pagination.CharactersPagingSource
 import com.example.pathchallenge.core.remote.util.Resource
+import com.example.pathchallenge.core.util.Constants
 import com.example.pathchallenge.core.util.Constants.LIMIT
+import com.example.pathchallenge.core.util.extensions.toMD5
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -33,12 +35,23 @@ class CharactersRepositoryImpl @Inject constructor(
     private val characterEntityMapper: CharacterEntityMapper,
     private val charactersCache: CharactersCache
 ) : CharactersRepository {
+
+    private val ts = System.currentTimeMillis().toString()
+
+    private val hash = Constants.HASH_FORMAT.format(
+        ts,
+        Constants.PRIVATE_API_KEY,
+        Constants.PUBLIC_API_KEY
+    ).toMD5()
+
     override fun fetchCharacters(): Flow<PagingData<Character>> {
         return Pager(
             config = PagingConfig(pageSize = LIMIT, enablePlaceholders = false),
             pagingSourceFactory = {
                 CharactersPagingSource(
-                    charactersRemote
+                    charactersRemote,
+                    ts = ts,
+                    hash = hash
                 )
             }
         ).flow
@@ -50,7 +63,13 @@ class CharactersRepositoryImpl @Inject constructor(
     override suspend fun fetchComics(charId: Int): Resource<List<Comic>> {
         return try {
             val response =
-                withContext(postExecutionThread.io) { charactersRemote.fetchComics(charId) }
+                withContext(postExecutionThread.io) {
+                    charactersRemote.fetchComics(
+                        charId,
+                        ts,
+                        hash
+                    )
+                }
             if (response.isSuccessful) {
                 response.body()?.let {
                     Resource.Success(comicModelMapper.mapModelList(it.data.results))

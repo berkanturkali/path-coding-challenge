@@ -26,7 +26,7 @@ dependencies {
     //swipe-refresh
     implementation(Dependencies.View.swipeRefreshLayout)
 
-
+    //navigation-component
     implementation(Dependencies.Navigation.navigationFragmentKtx)
     implementation(Dependencies.Navigation.navigationUiKtx)
 }

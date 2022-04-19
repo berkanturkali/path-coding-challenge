@@ -18,6 +18,5 @@ interface CharactersRepository {
 
     suspend fun delete(character: Character)
 
-
     suspend fun character(id: Int): Character?
 }

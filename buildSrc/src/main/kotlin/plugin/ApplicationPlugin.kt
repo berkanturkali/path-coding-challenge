@@ -8,6 +8,7 @@ import implementAll
 import kotlinAndroid
 import kotlinKapt
 import testImplementation
+import gms
 
 class ApplicationPlugin : BasePlugin() {
     override val pluginConfig: PluginConfig
@@ -15,6 +16,7 @@ class ApplicationPlugin : BasePlugin() {
             apply(APP_PLUGIN_ID)
             kotlinAndroid
             kotlinKapt
+            gms
         }
     override val libraryConfig: LibraryConfig
         get() = {

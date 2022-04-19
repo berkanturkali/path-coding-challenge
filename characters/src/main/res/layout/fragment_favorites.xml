@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/emptyFavouriteIv"
+            android:id="@+id/empty_fav_iv"
             android:layout_width="@dimen/dimen_72"
             android:layout_height="@dimen/dimen_72"
             android:src="@drawable/ic_star"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="No favorites"
+            android:text="@string/no_favorites"
             android:textColor="@color/light_gray" />
     </LinearLayout>
 

@@ -9,7 +9,9 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class CharactersPagingSource constructor(
-    private val charactersRemote: CharactersRemote
+    private val charactersRemote: CharactersRemote,
+    private val ts: String,
+    private val hash: String
 ) : PagingSource<Int, CharacterDto>() {
     override fun getRefreshKey(state: PagingState<Int, CharacterDto>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -22,7 +24,12 @@ class CharactersPagingSource constructor(
         return try {
             val offset = params.key ?: 0
             val response =
-                charactersRemote.fetchCharacters(offset = offset, limit = params.loadSize)
+                charactersRemote.fetchCharacters(
+                    offset = offset,
+                    limit = params.loadSize,
+                    ts = ts,
+                    hash = hash
+                )
             val responseOffset = response.data.offset
             val totalChars = response.data.total
 

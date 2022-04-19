@@ -17,8 +17,8 @@ class CharactersCacheImpl @Inject constructor(
         return dao.characters()
     }
 
-    override suspend fun delete(favoriteEntity: CharacterEntity) {
-        dao.delete(favoriteEntity)
+    override suspend fun delete(characterEntity: CharacterEntity) {
+        dao.delete(characterEntity)
     }
 
     override suspend fun character(id: Int): CharacterEntity? {
